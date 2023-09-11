@@ -25,7 +25,7 @@ const TodoWriter = ({ onTodoSet }: TodoWriterProps): JSX.Element => {
       <input
         type="text"
         className="todo-writer__input"
-        placeholder="Create new todo"
+        placeholder="Create new todo..."
         onKeyDown={handleKeyDown}
         onChange={handleTextChange}
         value={todo}

@@ -2,8 +2,11 @@
   display: flex;
   justify-content: center;
   gap: 16px;
+  padding: 16px 24px;
+  background-color: hsl(0, 0%, 98%);
+  border-radius: 8px;
   color: hsl(236, 9%, 61%);
-  padding: 20px 24px;
+  font-weight: 700;
 }
 
 .filters__button:hover {

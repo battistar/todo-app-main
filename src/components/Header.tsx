@@ -6,7 +6,7 @@ const Header = (): JSX.Element => {
     <header className="header">
       <h1 className="header__title">TODO</h1>
       <button>
-        <MoonIcon />
+        <MoonIcon className="header__theme-icon" />
       </button>
     </header>
   );

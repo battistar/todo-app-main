@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 20px 24px;
+  padding: 16px 24px;
 }
 
 .todo-item input[type='checkbox'] {
@@ -30,8 +30,8 @@
 
 .todo-item__text {
   flex: 1;
-  align-self: flex-end;
   color: hsl(235, 19%, 35%);
+  padding-top: 4px;
 }
 
 .todo-item__text.completed {
@@ -43,4 +43,8 @@
   border: none;
   background: none;
   cursor: pointer;
+}
+
+.todo-item__remove-button__icon {
+  transform: scale(0.7);
 }

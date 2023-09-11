@@ -1,0 +1,6 @@
+.todo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0px 20px;
+}

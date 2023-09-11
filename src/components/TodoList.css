@@ -1,6 +1,9 @@
 .todo-list {
   display: flex;
   flex-direction: column;
+  background-color: hsl(0, 0%, 98%);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .todo-list__divider {

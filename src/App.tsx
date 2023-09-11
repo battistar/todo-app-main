@@ -2,10 +2,12 @@ import TodoList from 'components/TodoList';
 import TodoItem from './components/TodoItem';
 import Filters from 'components/Filters';
 import Help from 'components/Help';
+import TodoWriter from 'components/TodoWriter';
 
 const App = (): JSX.Element => {
   return (
     <>
+      <TodoWriter />
       <TodoList>
         <TodoItem completed>Complete online Java course</TodoItem>
         <TodoItem>Jog around the park 3x</TodoItem>

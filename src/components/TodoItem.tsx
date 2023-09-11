@@ -5,10 +5,10 @@ type TodoItemProps = {
   children: string;
   toggle?: () => void;
   remove?: () => void;
-  checked?: boolean;
+  completed?: boolean;
 };
 
-const TodoItem = ({ children, toggle, remove, checked }: TodoItemProps): JSX.Element => {
+const TodoItem = ({ children, toggle, remove, completed }: TodoItemProps): JSX.Element => {
   const handleCheckboxClick = (): void => {
     if (toggle) {
       toggle();
@@ -24,7 +24,7 @@ const TodoItem = ({ children, toggle, remove, checked }: TodoItemProps): JSX.Ele
   return (
     <div className="todo-item">
       <input type="checkbox" className="todo-item__checkbox" onClick={handleCheckboxClick} />
-      <p className={`todo-item__text ${checked && 'checked'}`}>{children}</p>
+      <p className={`todo-item__text ${completed && 'completed'}`}>{children}</p>
       <button className="todo-item__remove-button" onClick={handleRemoveClick}>
         <IconCross />
       </button>

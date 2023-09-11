@@ -1,0 +1,15 @@
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  color: hsl(236, 9%, 61%);
+  padding: 20px 24px;
+}
+
+.filters__button:hover {
+  color: hsl(235, 19%, 35%);
+}
+
+.filters__button:active {
+  color: hsl(220, 98%, 61%);
+}

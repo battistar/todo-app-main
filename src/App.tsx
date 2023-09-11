@@ -1,6 +1,7 @@
 import TodoList from 'components/TodoList';
 import TodoItem from './components/TodoItem';
 import Filters from 'components/Filters';
+import Help from 'components/Help';
 
 const App = (): JSX.Element => {
   return (
@@ -14,6 +15,7 @@ const App = (): JSX.Element => {
         <TodoItem>Complete Todo App on Frontend Mentor</TodoItem>
       </TodoList>
       <Filters />
+      <Help />
     </>
   );
 };

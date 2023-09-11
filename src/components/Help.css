@@ -1,0 +1,10 @@
+.help {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.help__text {
+  color: hsl(236, 9%, 61%);
+}

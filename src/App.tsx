@@ -1,5 +1,7 @@
+import TodoItem from './components/TodoItem';
+
 const App = (): JSX.Element => {
-  return <></>;
+  return <TodoItem />;
 };
 
 export default App;

@@ -23,7 +23,7 @@ const TodoItem = ({ children, toggle, remove, completed }: TodoItemProps): JSX.E
 
   return (
     <div className="todo-item">
-      <input type="checkbox" className="todo-item__checkbox" onClick={handleCheckboxClick} />
+      <input type="checkbox" className="todo-item__checkbox" onClick={handleCheckboxClick} checked={completed} />
       <p className={`todo-item__text ${completed && 'completed'}`}>{children}</p>
       <button className="todo-item__remove-button" onClick={handleRemoveClick}>
         <IconCross />

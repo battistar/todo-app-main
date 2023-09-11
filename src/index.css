@@ -1,7 +1,7 @@
 html {
   box-sizing: border-box;
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 *,
@@ -38,4 +38,12 @@ img {
 input {
   margin: 0;
   padding: 0;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
 }

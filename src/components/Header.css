@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 56px 0px;
+}
+
+.header__title {
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  font-weight: 700;
+  color: #ffffff;
+}

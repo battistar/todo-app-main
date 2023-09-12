@@ -1,5 +1,30 @@
 import { Filter } from 'store';
-import './Filters.css';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background-color: hsl(0, 0%, 98%);
+  border-radius: 8px;
+  color: hsl(236, 9%, 61%);
+  font-weight: 700;
+`;
+
+const Button = styled.button`
+  &:hover {
+    color: hsl(235, 19%, 35%);
+  }
+
+  &:active {
+    color: hsl(220, 98%, 61%);
+  }
+
+  &.active {
+    color: hsl(220, 98%, 61%);
+  }
+`;
 
 type FilterProps = {
   onFilterChange: (filter: Filter) => void;
@@ -12,23 +37,17 @@ const Filters = ({ onFilterChange, currentFilter }: FilterProps): JSX.Element =>
   };
 
   return (
-    <div className="filters">
-      <button onClick={handleFilterChange('all')} className={`filters__button ${currentFilter === 'all' && 'active'}`}>
+    <Container>
+      <Button onClick={handleFilterChange('all')} className={`${currentFilter === 'all' && 'active'}`}>
         All
-      </button>
-      <button
-        onClick={handleFilterChange('active')}
-        className={`filters__button ${currentFilter === 'active' && 'active'}`}
-      >
+      </Button>
+      <Button onClick={handleFilterChange('active')} className={`${currentFilter === 'active' && 'active'}`}>
         Active
-      </button>
-      <button
-        onClick={handleFilterChange('completed')}
-        className={`filters__button ${currentFilter === 'completed' && 'active'}`}
-      >
+      </Button>
+      <Button onClick={handleFilterChange('completed')} className={`${currentFilter === 'completed' && 'active'}`}>
         Completed
-      </button>
-    </div>
+      </Button>
+    </Container>
   );
 };
 

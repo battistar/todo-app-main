@@ -1,4 +1,3 @@
-import './Todo.css';
 import Filters from './Filters';
 import Help from './Help';
 import TodoItem from './TodoItem';
@@ -6,6 +5,14 @@ import TodoList from './TodoList';
 import TodoWriter from './TodoWriter';
 import { Filter, useTodo } from 'store';
 import { useCallback } from 'react';
+import styled from 'styled-components';
+
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0px 20px;
+`;
 
 const Todo = (): JSX.Element => {
   const { todos, filter, leftItems, toggleTodo, removeTodo, addTodo, removeCompleted, setFilter } = useTodo();
@@ -43,7 +50,7 @@ const Todo = (): JSX.Element => {
   );
 
   return (
-    <main className="todo">
+    <Container>
       <TodoWriter onTodoSet={handleAddTodo} />
       <TodoList leftItems={leftItems} removeCompleted={handleRemoveCompleted}>
         {todos.map((todo) => {
@@ -61,7 +68,7 @@ const Todo = (): JSX.Element => {
       </TodoList>
       <Filters currentFilter={filter} onFilterChange={handleFilterChange} />
       <Help />
-    </main>
+    </Container>
   );
 };
 

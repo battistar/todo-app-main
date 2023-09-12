@@ -21,7 +21,7 @@ const TodoList = ({ children, leftItems, removeCompleted }: TodoListProps): JSX.
           return (
             <div key={index}>
               {child}
-              <div className="todo-list__divider"></div>
+              <hr />
             </div>
           );
         })}

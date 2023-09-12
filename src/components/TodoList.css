@@ -6,10 +6,6 @@
   overflow: hidden;
 }
 
-.todo-list__divider {
-  border-top: 1px solid hsl(233, 11%, 84%);
-}
-
 .todo-list__footer {
   display: flex;
   justify-content: space-between;

@@ -1,5 +1,36 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
-import './TodoWriter.css';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 24px;
+  background-color: hsl(0, 0%, 98%);
+  border-radius: 8px;
+
+  & input[type='checkbox'] {
+    appearance: none;
+    margin: 0;
+  }
+`;
+
+const Checkbox = styled.input.attrs({ type: 'checkbox' })`
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid hsl(233, 11%, 84%);
+`;
+
+const InputText = styled.input.attrs({ type: 'text' })`
+  flex: 1;
+  border: none;
+  padding-top: 4px;
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 type TodoWriterProps = {
   onTodoSet?: (todo: string) => void;
@@ -20,17 +51,16 @@ const TodoWriter = ({ onTodoSet }: TodoWriterProps): JSX.Element => {
   };
 
   return (
-    <div className="todo-writer">
-      <input type="checkbox" className="todo-writer__checkbox" disabled />
-      <input
+    <Container>
+      <Checkbox disabled />
+      <InputText
         type="text"
-        className="todo-writer__input"
         placeholder="Create new todo..."
         onKeyDown={handleKeyDown}
         onChange={handleTextChange}
         value={todo}
       />
-    </div>
+    </Container>
   );
 };
 

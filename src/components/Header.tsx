@@ -1,14 +1,31 @@
-import './Header.css';
+import styled from 'styled-components';
 import { ReactComponent as MoonIcon } from 'assets/images/icon-moon.svg';
+
+const StyledHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  padding: 32px 0px;
+  margin: 0px 20px;
+`;
+
+const Title = styled.h1`
+  text-transform: uppercase;
+  letter-spacing: 12px;
+  color: #ffffff;
+`;
+
+const StyledMoonIcon = styled(MoonIcon)`
+  transform: scale(0.8);
+`;
 
 const Header = (): JSX.Element => {
   return (
-    <header className="header">
-      <h1 className="header__title">TODO</h1>
+    <StyledHeader>
+      <Title>TODO</Title>
       <button>
-        <MoonIcon className="header__theme-icon" />
+        <StyledMoonIcon />
       </button>
-    </header>
+    </StyledHeader>
   );
 };
 

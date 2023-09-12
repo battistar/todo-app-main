@@ -3,27 +3,27 @@ import './TodoItem.css';
 
 type TodoItemProps = {
   children: string;
-  toggle?: () => void;
-  remove?: () => void;
+  onToggle?: () => void;
+  onRemove?: () => void;
   completed?: boolean;
 };
 
-const TodoItem = ({ children, toggle, remove, completed }: TodoItemProps): JSX.Element => {
+const TodoItem = ({ children, onToggle, onRemove, completed }: TodoItemProps): JSX.Element => {
   const handleCheckboxClick = (): void => {
-    if (toggle) {
-      toggle();
+    if (onToggle) {
+      onToggle();
     }
   };
 
   const handleRemoveClick = (): void => {
-    if (remove) {
-      remove();
+    if (onRemove) {
+      onRemove();
     }
   };
 
   return (
     <div className="todo-item">
-      <input type="checkbox" className="todo-item__checkbox" onClick={handleCheckboxClick} checked={completed} />
+      <input type="checkbox" className="todo-item__checkbox" onClick={handleCheckboxClick} defaultChecked={completed} />
       <p className={`todo-item__text ${completed && 'completed'}`}>{children}</p>
       <button className="todo-item__remove-button" onClick={handleRemoveClick}>
         <IconCross className="todo-item__remove-button__icon" />

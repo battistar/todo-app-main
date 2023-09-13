@@ -6,7 +6,7 @@ const Container = styled.div`
   align-items: center;
   gap: 20px;
   padding: 16px 24px;
-  background-color: hsl(0, 0%, 98%);
+  background-color: ${(props): string => props.theme.listBackground};
   border-radius: 8px;
 
   & input[type='checkbox'] {
@@ -25,7 +25,14 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
 const InputText = styled.input.attrs({ type: 'text' })`
   flex: 1;
   border: none;
+  background: transparent;
   padding-top: 4px;
+  color: ${(props): string => props.theme.darkText};
+
+  &::placeholder {
+    color: ${(props): string => props.theme.lightText};
+    opacity: 1;
+  }
 
   &:focus {
     outline: none;

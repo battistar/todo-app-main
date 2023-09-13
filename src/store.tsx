@@ -9,9 +9,12 @@ type Todo = {
 
 export type Filter = 'all' | 'active' | 'completed';
 
+export type Theme = 'light' | 'dark';
+
 type TodoState = {
   todoList: Todo[];
   filter: Filter;
+  theme: Theme;
 };
 
 type TodoActions =
@@ -19,7 +22,8 @@ type TodoActions =
   | { type: 'REMOVE_TODO'; payload: string }
   | { type: 'TOGGLE_TODO'; payload: string }
   | { type: 'REMOVE_COMPLETED' }
-  | { type: 'SET_FILTER'; payload: Filter };
+  | { type: 'SET_FILTER'; payload: Filter }
+  | { type: 'SET_THEME'; payload: Theme };
 
 const initialState: TodoState = {
   todoList: [
@@ -61,19 +65,22 @@ const initialState: TodoState = {
     },
   ],
   filter: 'all',
+  theme: 'light',
 };
 
 const useTodoSource = (): {
   todos: Todo[];
   filter: Filter;
+  theme: Theme;
   leftItems: number;
   addTodo: (text: string) => void;
   removeTodo: (id: string) => void;
   toggleTodo: (id: string) => void;
   removeCompleted: () => void;
   setFilter: (filter: Filter) => void;
+  setTheme: (theme: Theme) => void;
 } => {
-  const [{ todoList, filter }, dispatch] = useReducer((state: TodoState, action: TodoActions) => {
+  const [{ todoList, filter, theme }, dispatch] = useReducer((state: TodoState, action: TodoActions) => {
     switch (action.type) {
       case 'ADD_TODO':
         return { ...state, todoList: [...state.todoList, action.payload] };
@@ -101,9 +108,10 @@ const useTodoSource = (): {
 
         return { ...state, todoList: pendingTodos };
       }
-      case 'SET_FILTER': {
+      case 'SET_FILTER':
         return { ...state, filter: action.payload };
-      }
+      case 'SET_THEME':
+        return { ...state, theme: action.payload };
     }
   }, initialState);
 
@@ -157,6 +165,10 @@ const useTodoSource = (): {
     dispatch({ type: 'SET_FILTER', payload: filter });
   }, []);
 
+  const setTheme = useCallback((theme: Theme) => {
+    dispatch({ type: 'SET_THEME', payload: theme });
+  }, []);
+
   const todos = useMemo(() => {
     switch (filter) {
       case 'all':
@@ -173,7 +185,7 @@ const useTodoSource = (): {
     }
   }, [todoList, filter]);
 
-  return { todos, filter, leftItems, addTodo, removeTodo, toggleTodo, removeCompleted, setFilter };
+  return { todos, filter, theme, leftItems, addTodo, removeTodo, toggleTodo, removeCompleted, setFilter, setTheme };
 };
 
 const TodoContext = createContext<ReturnType<typeof useTodoSource>>({} as ReturnType<typeof useTodoSource>);

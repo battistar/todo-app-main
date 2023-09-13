@@ -54,14 +54,6 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid hsl(233, 11%, 84%);
   margin: 0;
   padding: 0;
-}
-
-body {
-  background: url('/src/assets/images/bg-mobile-light.jpg');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-color: hsl(236, 33%, 92%);
 }

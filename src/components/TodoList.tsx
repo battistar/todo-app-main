@@ -4,15 +4,19 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: hsl(0, 0%, 98%);
+  background-color: ${(props): string => props.theme.listBackground};
   border-radius: 8px;
   overflow: hidden;
+`;
+
+const Divider = styled.hr`
+  border-top: 1px solid ${(props): string => props.theme.divider};
 `;
 
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
-  color: hsl(236, 9%, 61%);
+  color: ${(props): string => props.theme.normalText};
   padding: 20px 24px;
   font-size: 0.8rem;
 `;
@@ -20,7 +24,7 @@ const Footer = styled.div`
 const Button = styled.button`
   &:hover,
   &:active {
-    color: hsl(235, 19%, 35%);
+    color: ${(props): string => props.theme.darkText};
   }
 `;
 
@@ -44,7 +48,7 @@ const TodoList = ({ children, leftItems, removeCompleted }: TodoListProps): JSX.
           return (
             <div key={index}>
               {child}
-              <hr />
+              <Divider />
             </div>
           );
         })}

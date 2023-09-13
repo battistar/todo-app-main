@@ -17,7 +17,7 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  border: 1px solid hsl(233, 11%, 84%);
+  border: 1px solid ${(props): string => props.theme.lightText};
 
   &:hover,
   &:active {
@@ -33,12 +33,12 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
 
 const Text = styled.p`
   flex: 1;
-  color: hsl(235, 19%, 35%);
+  color: ${(props): string => props.theme.darkText};
   padding-top: 4px;
 
   &.completed {
     text-decoration: line-through;
-    color: hsl(233, 11%, 84%);
+    color: ${(props): string => props.theme.lightText};
   }
 `;
 

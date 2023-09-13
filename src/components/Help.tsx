@@ -9,7 +9,7 @@ const Container = styled.div`
 `;
 
 const Text = styled.p`
-  color: hsl(236, 9%, 61%);
+  color: ${(props): string => props.theme.normalText};
 `;
 
 const Help = (): JSX.Element => {

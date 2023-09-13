@@ -16,6 +16,7 @@ const Divider = styled.hr`
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: ${(props): string => props.theme.normalText};
   padding: 20px 24px;
   font-size: 0.8rem;
@@ -31,10 +32,11 @@ const Button = styled.button`
 type TodoListProps = {
   children: ReactNode;
   leftItems: number;
+  filters: ReactNode;
   removeCompleted?: () => void;
 };
 
-const TodoList = ({ children, leftItems, removeCompleted }: TodoListProps): JSX.Element => {
+const TodoList = ({ children, filters, leftItems, removeCompleted }: TodoListProps): JSX.Element => {
   const handleRemoveCompleted = (): void => {
     if (removeCompleted) {
       removeCompleted();
@@ -54,6 +56,7 @@ const TodoList = ({ children, leftItems, removeCompleted }: TodoListProps): JSX.
         })}
       <Footer>
         <div>{leftItems} items left</div>
+        {filters}
         <Button onClick={handleRemoveCompleted}>Clear Completed</Button>
       </Footer>
     </Container>

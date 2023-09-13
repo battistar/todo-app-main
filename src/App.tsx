@@ -13,6 +13,7 @@ const themeLight = {
   divider: 'hsl(233, 11%, 84%)',
   title: '#FFFFFF',
   backgroundImageURL: '/src/assets/images/bg-mobile-light.jpg',
+  backgroundImageURLDesktop: '/src/assets/images/bg-desktop-light.jpg',
 };
 
 const themeDark = {
@@ -25,14 +26,35 @@ const themeDark = {
   divider: 'hsl(233, 14%, 35%)',
   title: '#FFFFFF',
   backgroundImageURL: '/src/assets/images/bg-mobile-dark.jpg',
+  backgroundImageURLDesktop: '/src/assets/images/bg-desktop-dark.jpg',
 };
+
+const OuterContainer = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: 1400px) {
+    height: 100vh;
+    align-items: center;
+  }
+`;
+
+const InnerContainer = styled.div`
+  width: 100%;
+  max-width: 500px;
+`;
 
 const Background = styled.div`
   height: 100vh;
-  background: url(${(props): string => props.theme.backgroundImageURL});
+  background-image: url(${(props): string => props.theme.backgroundImageURL});
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 100% auto;
   background-color: ${(props): string => props.theme.background};
+
+  @media (min-width: 768px) {
+    background-image: url(${(props): string => props.theme.backgroundImageURLDesktop});
+  }
 `;
 
 const App = (): JSX.Element => {
@@ -41,8 +63,12 @@ const App = (): JSX.Element => {
   return (
     <ThemeProvider theme={theme === 'light' ? themeLight : themeDark}>
       <Background>
-        <Header />
-        <Todo />
+        <OuterContainer>
+          <InnerContainer>
+            <Header />
+            <Todo />
+          </InnerContainer>
+        </OuterContainer>
       </Background>
     </ThemeProvider>
   );

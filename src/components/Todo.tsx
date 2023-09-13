@@ -14,6 +14,27 @@ const Container = styled.main`
   margin: 0px 20px;
 `;
 
+const MobileFilters = styled.div`
+  @media (min-width: 992px) {
+    display: none;
+  }
+`;
+
+const DesktopFilters = styled.div`
+  display: none;
+
+  @media (min-width: 992px) {
+    display: block;
+
+    & div {
+      padding: 0px;
+      background-color: transparent;
+      border-radius: 0px;
+      font-size: 0.8rem;
+    }
+  }
+`;
+
 const Todo = (): JSX.Element => {
   const { todos, filter, leftItems, toggleTodo, removeTodo, addTodo, removeCompleted, setFilter } = useTodo();
 
@@ -52,7 +73,15 @@ const Todo = (): JSX.Element => {
   return (
     <Container>
       <TodoWriter onTodoSet={handleAddTodo} />
-      <TodoList leftItems={leftItems} removeCompleted={handleRemoveCompleted}>
+      <TodoList
+        leftItems={leftItems}
+        filters={
+          <DesktopFilters>
+            <Filters currentFilter={filter} onFilterChange={handleFilterChange} />
+          </DesktopFilters>
+        }
+        removeCompleted={handleRemoveCompleted}
+      >
         {todos.map((todo) => {
           return (
             <TodoItem
@@ -66,7 +95,9 @@ const Todo = (): JSX.Element => {
           );
         })}
       </TodoList>
-      <Filters currentFilter={filter} onFilterChange={handleFilterChange} />
+      <MobileFilters>
+        <Filters currentFilter={filter} onFilterChange={handleFilterChange} />
+      </MobileFilters>
       <Help />
     </Container>
   );

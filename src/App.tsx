@@ -2,6 +2,10 @@ import Header from 'components/Header';
 import Todo from 'components/Todo';
 import { useTodo } from 'store';
 import styled, { ThemeProvider } from 'styled-components';
+import mobileBackgroundLight from '/src/assets/images/bg-mobile-light.jpg';
+import mobileBackgroundDark from '/src/assets/images/bg-mobile-dark.jpg';
+import desktopBackgroundLight from '/src/assets/images/bg-desktop-light.jpg';
+import desktopBackgroundDark from '/src/assets/images/bg-desktop-dark.jpg';
 
 const themeLight = {
   primary: 'hsl(220, 98%, 61%)',
@@ -12,8 +16,8 @@ const themeLight = {
   darkText: 'hsl(235, 19%, 35%)',
   divider: 'hsl(233, 11%, 84%)',
   title: '#FFFFFF',
-  backgroundImageURL: '/src/assets/images/bg-mobile-light.jpg',
-  backgroundImageURLDesktop: '/src/assets/images/bg-desktop-light.jpg',
+  backgroundImageURL: mobileBackgroundLight,
+  backgroundImageURLDesktop: desktopBackgroundLight,
 };
 
 const themeDark = {
@@ -25,8 +29,8 @@ const themeDark = {
   darkText: 'hsl(234, 39%, 85%)',
   divider: 'hsl(233, 14%, 35%)',
   title: '#FFFFFF',
-  backgroundImageURL: '/src/assets/images/bg-mobile-dark.jpg',
-  backgroundImageURLDesktop: '/src/assets/images/bg-desktop-dark.jpg',
+  backgroundImageURL: mobileBackgroundDark,
+  backgroundImageURLDesktop: desktopBackgroundDark,
 };
 
 const OuterContainer = styled.div`

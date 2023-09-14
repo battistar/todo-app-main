@@ -1,6 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { ReactComponent as IconCross } from 'assets/images/icon-cross.svg';
+import IconCheck from 'assets/images/icon-check.svg';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -37,7 +38,7 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   }
 
   &:checked {
-    background: hsl(280, 87%, 65%) url('./src/assets/images/icon-check.svg') no-repeat center;
+    background: hsl(280, 87%, 65%) url(${IconCheck}) no-repeat center;
     border-color: hsl(280, 87%, 65%);
   }
 `;

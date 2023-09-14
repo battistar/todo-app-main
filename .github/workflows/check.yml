@@ -9,7 +9,7 @@ on:
       - '**'
 
 jobs:
-  ci:
+  check:
     runs-on: ubuntu-latest
 
     strategy:

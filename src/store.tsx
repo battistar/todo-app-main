@@ -2,7 +2,6 @@ import { createContext, useCallback, useContext, useMemo, useReducer } from 'rea
 
 type Todo = {
   id: string;
-  position: number;
   completed: boolean;
   text: string;
 };
@@ -21,45 +20,40 @@ type TodoActions =
   | { type: 'ADD_TODO'; payload: Todo }
   | { type: 'REMOVE_TODO'; payload: string }
   | { type: 'TOGGLE_TODO'; payload: string }
-  | { type: 'REMOVE_COMPLETED' }
+  | { type: 'CLEAR' }
   | { type: 'SET_FILTER'; payload: Filter }
-  | { type: 'SET_THEME'; payload: Theme };
+  | { type: 'SET_THEME'; payload: Theme }
+  | { type: 'SWITCH_ITEMS'; payload: { active: string; over: string } };
 
 const initialState: TodoState = {
   todoList: [
     {
       id: self.crypto.randomUUID(),
-      position: 0,
       completed: true,
       text: 'Complete online Java course',
     },
     {
       id: self.crypto.randomUUID(),
-      position: 1,
       completed: false,
       text: 'Jog around the park 3x',
     },
     {
       id: self.crypto.randomUUID(),
-      position: 2,
       completed: false,
       text: '10 minutes meditation',
     },
     {
       id: self.crypto.randomUUID(),
-      position: 3,
       completed: false,
       text: 'Read for 1 hour',
     },
     {
       id: self.crypto.randomUUID(),
-      position: 4,
       completed: false,
       text: 'Pick up groceries',
     },
     {
       id: self.crypto.randomUUID(),
-      position: 5,
       completed: false,
       text: 'Complete Todo App on Frontend Mentor',
     },
@@ -76,8 +70,9 @@ const useTodoSource = (): {
   addTodo: (text: string) => void;
   removeTodo: (id: string) => void;
   toggleTodo: (id: string) => void;
-  removeCompleted: () => void;
+  clear: () => void;
   setFilter: (filter: Filter) => void;
+  switchItems: (active: string, over: string) => void;
   setTheme: (theme: Theme) => void;
 } => {
   const [{ todoList, filter, theme }, dispatch] = useReducer((state: TodoState, action: TodoActions) => {
@@ -101,7 +96,7 @@ const useTodoSource = (): {
 
         return { ...state, todoList: todoList };
       }
-      case 'REMOVE_COMPLETED': {
+      case 'CLEAR': {
         const pendingTodos = state.todoList.filter((todo) => {
           return !todo.completed;
         });
@@ -112,18 +107,25 @@ const useTodoSource = (): {
         return { ...state, filter: action.payload };
       case 'SET_THEME':
         return { ...state, theme: action.payload };
+      case 'SWITCH_ITEMS': {
+        const activeTodoIndex = state.todoList.findIndex((todo) => {
+          return todo.id === action.payload.active;
+        });
+        const overTodoIndex = state.todoList.findIndex((todo) => {
+          return todo.id === action.payload.over;
+        });
+
+        if (activeTodoIndex !== -1 && overTodoIndex !== -1) {
+          const newTodoList = [...state.todoList];
+          newTodoList.splice(overTodoIndex, 0, newTodoList.splice(activeTodoIndex, 1)[0]);
+
+          return { ...state, todoList: newTodoList };
+        }
+
+        return state;
+      }
     }
   }, initialState);
-
-  const lastPosition = useMemo((): number => {
-    return todoList.reduce((acc, todo) => {
-      if (todo.position > acc) {
-        return todo.position;
-      }
-
-      return acc;
-    }, 0);
-  }, [todoList]);
 
   const leftItems = useMemo((): number => {
     return todoList.reduce((acc, todo) => {
@@ -135,19 +137,15 @@ const useTodoSource = (): {
     }, 0);
   }, [todoList]);
 
-  const addTodo = useCallback(
-    (text: string): void => {
-      const todo: Todo = {
-        id: self.crypto.randomUUID(),
-        position: lastPosition + 1,
-        completed: false,
-        text: text,
-      };
+  const addTodo = useCallback((text: string): void => {
+    const todo: Todo = {
+      id: self.crypto.randomUUID(),
+      completed: false,
+      text: text,
+    };
 
-      dispatch({ type: 'ADD_TODO', payload: todo });
-    },
-    [lastPosition],
-  );
+    dispatch({ type: 'ADD_TODO', payload: todo });
+  }, []);
 
   const removeTodo = useCallback((id: string): void => {
     dispatch({ type: 'REMOVE_TODO', payload: id });
@@ -157,8 +155,8 @@ const useTodoSource = (): {
     dispatch({ type: 'TOGGLE_TODO', payload: id });
   }, []);
 
-  const removeCompleted = useCallback((): void => {
-    dispatch({ type: 'REMOVE_COMPLETED' });
+  const clear = useCallback((): void => {
+    dispatch({ type: 'CLEAR' });
   }, []);
 
   const setFilter = useCallback((filter: Filter) => {
@@ -167,6 +165,10 @@ const useTodoSource = (): {
 
   const setTheme = useCallback((theme: Theme) => {
     dispatch({ type: 'SET_THEME', payload: theme });
+  }, []);
+
+  const switchItems = useCallback((active: string, over: string) => {
+    dispatch({ type: 'SWITCH_ITEMS', payload: { active: active, over: over } });
   }, []);
 
   const todos = useMemo(() => {
@@ -185,7 +187,7 @@ const useTodoSource = (): {
     }
   }, [todoList, filter]);
 
-  return { todos, filter, theme, leftItems, addTodo, removeTodo, toggleTodo, removeCompleted, setFilter, setTheme };
+  return { todos, filter, theme, leftItems, addTodo, removeTodo, toggleTodo, clear, setFilter, switchItems, setTheme };
 };
 
 const TodoContext = createContext<ReturnType<typeof useTodoSource>>({} as ReturnType<typeof useTodoSource>);

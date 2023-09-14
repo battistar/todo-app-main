@@ -36,7 +36,7 @@ const DesktopFilters = styled.div`
 `;
 
 const Todo = (): JSX.Element => {
-  const { todos, filter, leftItems, toggleTodo, removeTodo, addTodo, removeCompleted, setFilter } = useTodo();
+  const { todos, filter, leftItems, toggleTodo, removeTodo, addTodo, clear, switchItems, setFilter } = useTodo();
 
   const handleTodoToggle = useCallback(
     (id: string) => () => {
@@ -59,9 +59,9 @@ const Todo = (): JSX.Element => {
     [addTodo],
   );
 
-  const handleRemoveCompleted = useCallback(() => {
-    removeCompleted();
-  }, [removeCompleted]);
+  const handleClear = useCallback(() => {
+    clear();
+  }, [clear]);
 
   const handleFilterChange = useCallback(
     (filter: Filter) => {
@@ -70,22 +70,34 @@ const Todo = (): JSX.Element => {
     [setFilter],
   );
 
+  const handleDragEnd = useCallback(
+    (active: string, over: string) => {
+      switchItems(active, over);
+    },
+    [switchItems],
+  );
+
   return (
     <Container>
       <TodoWriter onTodoSet={handleAddTodo} />
       <TodoList
         leftItems={leftItems}
+        items={todos.map((item) => {
+          return item.id;
+        })}
         filters={
           <DesktopFilters>
             <Filters currentFilter={filter} onFilterChange={handleFilterChange} />
           </DesktopFilters>
         }
-        removeCompleted={handleRemoveCompleted}
+        onClear={handleClear}
+        onDragEnd={handleDragEnd}
       >
         {todos.map((todo) => {
           return (
             <TodoItem
               key={todo.id}
+              id={todo.id}
               completed={todo.completed}
               onToggle={handleTodoToggle(todo.id)}
               onRemove={handleTodoRemove(todo.id)}

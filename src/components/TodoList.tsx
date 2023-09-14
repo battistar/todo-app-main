@@ -1,4 +1,6 @@
-import { ReactNode } from 'react';
+import { useSensors, useSensor, PointerSensor, DndContext, closestCenter, DragEndEvent } from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { ReactNode, useCallback } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -7,10 +9,6 @@ const Container = styled.div`
   background-color: ${(props): string => props.theme.listBackground};
   border-radius: 8px;
   overflow: hidden;
-`;
-
-const Divider = styled.hr`
-  border-top: 1px solid ${(props): string => props.theme.divider};
 `;
 
 const Footer = styled.div`
@@ -31,33 +29,44 @@ const Button = styled.button`
 
 type TodoListProps = {
   children: ReactNode;
+  items: string[];
   leftItems: number;
   filters: ReactNode;
-  removeCompleted?: () => void;
+  onClear?: () => void;
+  onDragEnd?: (active: string, over: string) => void;
 };
 
-const TodoList = ({ children, filters, leftItems, removeCompleted }: TodoListProps): JSX.Element => {
-  const handleRemoveCompleted = (): void => {
-    if (removeCompleted) {
-      removeCompleted();
+const TodoList = ({ children, items, filters, leftItems, onClear, onDragEnd }: TodoListProps): JSX.Element => {
+  const sensors = useSensors(useSensor(PointerSensor));
+
+  const handleClearClick = (): void => {
+    if (onClear) {
+      onClear();
     }
   };
 
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent): void => {
+      const { active, over } = event;
+
+      if (onDragEnd && over && active.id !== over.id) {
+        onDragEnd(active.id as string, over.id as string);
+      }
+    },
+    [onDragEnd],
+  );
+
   return (
     <Container>
-      {Array.isArray(children) &&
-        children.map((child, index) => {
-          return (
-            <div key={index}>
-              {child}
-              <Divider />
-            </div>
-          );
-        })}
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+          {children}
+        </SortableContext>
+      </DndContext>
       <Footer>
         <div>{leftItems} items left</div>
         {filters}
-        <Button onClick={handleRemoveCompleted}>Clear Completed</Button>
+        <Button onClick={handleClearClick}>Clear Completed</Button>
       </Footer>
     </Container>
   );

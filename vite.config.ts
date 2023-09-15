@@ -5,6 +5,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'todo-app-main',
+  base: '/todo-app-main',
   plugins: [react(), svgr(), tsconfigPaths()],
 });

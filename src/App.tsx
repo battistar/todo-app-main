@@ -6,6 +6,7 @@ import mobileBackgroundLight from '/src/assets/images/bg-mobile-light.jpg';
 import mobileBackgroundDark from '/src/assets/images/bg-mobile-dark.jpg';
 import desktopBackgroundLight from '/src/assets/images/bg-desktop-light.jpg';
 import desktopBackgroundDark from '/src/assets/images/bg-desktop-dark.jpg';
+import { useEffect } from 'react';
 
 const themeLight = {
   primary: 'hsl(220, 98%, 61%)',
@@ -51,11 +52,10 @@ const InnerContainer = styled.div`
 
 const Background = styled.div`
   height: 100vh;
-  height: -webkit-fill-available;
   background-image: url(${(props): string => props.theme.backgroundImageURL});
   background-repeat: no-repeat;
   background-size: 100% auto;
-  background-color: ${(props): string => props.theme.background};
+  background-color: 'transparent';
 
   @media (min-width: 768px) {
     background-image: url(${(props): string => props.theme.backgroundImageURLDesktop});
@@ -64,6 +64,12 @@ const Background = styled.div`
 
 const App = (): JSX.Element => {
   const { theme } = useTodo();
+
+  useEffect(() => {
+    theme === 'light'
+      ? (document.body.style.backgroundColor = themeLight.background)
+      : (document.body.style.backgroundColor = themeDark.background);
+  }, [theme]);
 
   return (
     <ThemeProvider theme={theme === 'light' ? themeLight : themeDark}>

@@ -1,8 +1,8 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { ReactComponent as IconCross } from 'assets/images/icon-cross.svg';
-import IconCheck from 'assets/images/icon-check.svg';
 import styled from 'styled-components';
+import Checkbox from './Checkbox';
 
 const Container = styled.div`
   display: flex;
@@ -22,24 +22,6 @@ const Divider = styled.hr`
 
   &.disabled {
     display: none;
-  }
-`;
-
-const Checkbox = styled.input.attrs({ type: 'checkbox' })`
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  border: 1px solid ${(props): string => props.theme.lightText};
-
-  &:hover,
-  &:active {
-    border-color: hsl(280, 87%, 65%);
-    cursor: pointer;
-  }
-
-  &:checked {
-    background: hsl(280, 87%, 65%) url(${IconCheck}) no-repeat center;
-    border-color: hsl(280, 87%, 65%);
   }
 `;
 
@@ -84,7 +66,7 @@ const TodoItem = ({ children, id, onToggle, onRemove, completed }: TodoItemProps
     transition,
   };
 
-  const handleCheckboxClick = (): void => {
+  const handleCheckboxChange = (): void => {
     if (onToggle) {
       onToggle();
     }
@@ -99,7 +81,7 @@ const TodoItem = ({ children, id, onToggle, onRemove, completed }: TodoItemProps
   return (
     <div ref={setNodeRef} style={style} {...attributes}>
       <Container>
-        <Checkbox onClick={handleCheckboxClick} defaultChecked={completed} />
+        <Checkbox onChange={handleCheckboxChange} checked={completed} />
         <Text className={completed ? 'completed' : ''} {...listeners}>
           {children}
         </Text>

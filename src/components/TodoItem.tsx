@@ -47,6 +47,8 @@ const Text = styled.p`
   flex: 1;
   color: ${(props): string => props.theme.darkText};
   padding-top: 4px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   cursor: pointer;
 

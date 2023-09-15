@@ -61,7 +61,3 @@ hr {
 body {
   height: 100vh;
 }
-
-body > div {
-  height: 100%;
-}

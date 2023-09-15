@@ -1,5 +1,6 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import styled from 'styled-components';
+import Checkbox from './Checkbox';
 
 const Container = styled.div`
   display: flex;
@@ -13,13 +14,6 @@ const Container = styled.div`
     appearance: none;
     margin: 0;
   }
-`;
-
-const Checkbox = styled.input.attrs({ type: 'checkbox' })`
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  border: 1px solid hsl(233, 11%, 84%);
 `;
 
 const InputText = styled.input.attrs({ type: 'text' })`

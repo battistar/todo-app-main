@@ -123,6 +123,8 @@ Error generating stack: `+i.message+`
   flex: 1;
   color: ${e=>e.theme.darkText};
   padding-top: 4px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   cursor: pointer;
 
@@ -186,7 +188,7 @@ Error generating stack: `+i.message+`
   &:focus {
     outline: none;
   }
-`,yy=({onTodoSet:e})=>{const[t,n]=y.useState(""),r=i=>{n(i.target.value)},o=i=>{i.key==="Enter"&&e&&(e(t),n(""))};return L.jsxs(gy,{children:[L.jsx(my,{disabled:!0}),L.jsx(vy,{type:"text",placeholder:"Create new todo...",onKeyDown:o,onChange:r,value:t})]})},wy=V.main`
+`,yy=({onTodoSet:e})=>{const[t,n]=y.useState(""),r=i=>{n(i.target.value)},o=i=>{i.key==="Enter"&&e&&(e(t),n(""),i.target.blur())};return L.jsxs(gy,{children:[L.jsx(my,{disabled:!0}),L.jsx(vy,{type:"text",placeholder:"Create new todo...",onKeyDown:o,onChange:r,value:t})]})},wy=V.main`
   display: flex;
   flex-direction: column;
   gap: 16px;

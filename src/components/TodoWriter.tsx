@@ -54,6 +54,9 @@ const TodoWriter = ({ onTodoSet }: TodoWriterProps): JSX.Element => {
     if (event.key === 'Enter' && onTodoSet) {
       onTodoSet(todo);
       setTodo('');
+
+      const inputEl = event.target as HTMLInputElement;
+      inputEl.blur();
     }
   };
 

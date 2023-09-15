@@ -40,7 +40,6 @@ const OuterContainer = styled.div`
 
   @media (min-width: 1400px) {
     height: 100%;
-    height: -webkit-fill-available;
     align-items: center;
   }
 `;
@@ -52,6 +51,7 @@ const InnerContainer = styled.div`
 
 const Background = styled.div`
   height: 100vh;
+  height: -webkit-fill-available;
   background-image: url(${(props): string => props.theme.backgroundImageURL});
   background-repeat: no-repeat;
   background-size: 100% auto;

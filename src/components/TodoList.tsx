@@ -1,5 +1,14 @@
-import { useSensors, useSensor, PointerSensor, DndContext, closestCenter, DragEndEvent } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import {
+  useSensors,
+  useSensor,
+  DndContext,
+  closestCenter,
+  DragEndEvent,
+  MouseSensor,
+  TouchSensor,
+  KeyboardSensor,
+} from '@dnd-kit/core';
+import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { ReactNode, useCallback } from 'react';
 import styled from 'styled-components';
 
@@ -37,7 +46,22 @@ type TodoListProps = {
 };
 
 const TodoList = ({ children, items, filters, leftItems, onClear, onDragEnd }: TodoListProps): JSX.Element => {
-  const sensors = useSensors(useSensor(PointerSensor));
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 300,
+        tolerance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
 
   const handleClearClick = (): void => {
     if (onClear) {

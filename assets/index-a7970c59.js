@@ -209,19 +209,19 @@ Error generating stack: `+i.message+`
     }
   }
 `,py=()=>{const{todos:e,filter:t,leftItems:n,toggleTodo:r,removeTodo:o,addTodo:i,clear:l,switchItems:s,setFilter:u}=ua(),a=y.useCallback(v=>()=>{r(v)},[r]),h=y.useCallback(v=>()=>{o(v)},[o]),f=y.useCallback(v=>{i(v)},[i]),m=y.useCallback(()=>{l()},[l]),g=y.useCallback(v=>{u(v)},[u]),S=y.useCallback((v,R)=>{s(v,R)},[s]);return L.jsxs(cy,{children:[L.jsx(ay,{onTodoSet:f}),L.jsx(iy,{leftItems:n,items:e.map(v=>v.id),filters:L.jsx(fy,{children:L.jsx(Xc,{currentFilter:t,onFilterChange:g})}),onClear:m,onDragEnd:S,children:e.map(v=>L.jsx(ty,{id:v.id,completed:v.completed,onToggle:a(v.id),onRemove:h(v.id),children:v.text},v.id))}),L.jsx(dy,{children:L.jsx(Xc,{currentFilter:t,onFilterChange:g})}),L.jsx(r0,{})]})},hy="/todo-app-main/assets/bg-mobile-light-df636158.jpg",gy="/todo-app-main/assets/bg-mobile-dark-0b3e4071.jpg",my="/todo-app-main/assets/bg-desktop-light-c99caf89.jpg",vy="/todo-app-main/assets/bg-desktop-dark-cf72eaad.jpg",yy={primary:"hsl(220, 98%, 61%)",background:"hsl(236, 33%, 92%)",listBackground:"hsl(0, 0%, 98%)",lightText:"hsl(233, 11%, 84%)",normalText:"hsl(236, 9%, 61%)",darkText:"hsl(235, 19%, 35%)",divider:"hsl(233, 11%, 84%)",title:"#FFFFFF",backgroundImageURL:hy,backgroundImageURLDesktop:my},wy={primary:"hsl(220, 98%, 61%)",background:"hsl(235, 21%, 11%)",listBackground:"hsl(235, 24%, 19%)",lightText:"hsl(234, 11%, 52%)",normalText:"hsl(233, 14%, 35%)",darkText:"hsl(234, 39%, 85%)",divider:"hsl(233, 14%, 35%)",title:"#FFFFFF",backgroundImageURL:gy,backgroundImageURLDesktop:vy},Sy=W.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
 
   @media (min-width: 1400px) {
-    height: 100vh;
+    height: 100%;
     align-items: center;
   }
 `,xy=W.div`
   width: 100%;
   max-width: 500px;
 `,ky=W.div`
-  height: 100vh;
+  height: 100%;
   background-image: url(${e=>e.theme.backgroundImageURL});
   background-repeat: no-repeat;
   background-size: 100% auto;

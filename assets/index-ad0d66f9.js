@@ -215,13 +215,14 @@ Error generating stack: `+i.message+`
 
   @media (min-width: 1400px) {
     height: 100%;
+    height: -webkit-fill-available;
     align-items: center;
   }
 `,xy=W.div`
   width: 100%;
   max-width: 500px;
 `,ky=W.div`
-  height: 100%;
+  height: 100vh;
   background-image: url(${e=>e.theme.backgroundImageURL});
   background-repeat: no-repeat;
   background-size: 100% auto;

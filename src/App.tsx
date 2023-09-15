@@ -34,12 +34,12 @@ const themeDark = {
 };
 
 const OuterContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
 
   @media (min-width: 1400px) {
-    height: 100vh;
+    height: 100%;
     align-items: center;
   }
 `;
@@ -50,7 +50,7 @@ const InnerContainer = styled.div`
 `;
 
 const Background = styled.div`
-  height: 100vh;
+  height: 100%;
   background-image: url(${(props): string => props.theme.backgroundImageURL});
   background-repeat: no-repeat;
   background-size: 100% auto;

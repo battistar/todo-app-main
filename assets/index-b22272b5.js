@@ -215,7 +215,6 @@ Error generating stack: `+i.message+`
 
   @media (min-width: 1400px) {
     height: 100%;
-    height: -webkit-fill-available;
     align-items: center;
   }
 `,xy=W.div`
@@ -223,6 +222,7 @@ Error generating stack: `+i.message+`
   max-width: 500px;
 `,ky=W.div`
   height: 100vh;
+  height: -webkit-fill-available;
   background-image: url(${e=>e.theme.backgroundImageURL});
   background-repeat: no-repeat;
   background-size: 100% auto;
